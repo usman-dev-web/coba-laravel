@@ -27,6 +27,7 @@ Route::get('/about', function () {
         "title" => "About",
         "name" => "M Usman Maulana",
         "email" => "um59411@gmail.com",
+        "hoby" => "Ngoding",
         "img" => "foto.jpg"
     ]);
 });
