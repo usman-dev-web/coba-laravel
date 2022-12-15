@@ -21,7 +21,11 @@ Route::get('/', function () {
 });
 
 Route::get('/about', function () {
-    return view('about');
+    return view('about', [
+        "name" => "M Usman Maulana",
+        "email" => "um59411@gmail.com",
+        "img" => "foto.jpg"
+    ]);
 });
 
 Route::get('/blog', function () {
