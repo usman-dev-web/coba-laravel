@@ -89,3 +89,12 @@ Route::get('posts/{slug}', function($slug){
         "post" => $new_post
     ]);
 });
+
+Route::get('/contact', function(){
+    return view('contact', [
+        "title" => "Contact",
+        "telp" => "0895392925828",
+        "email" => "usman.id",
+        "alamat" => "Pandeglang"
+    ]);
+});
