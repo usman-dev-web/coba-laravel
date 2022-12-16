@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -17,43 +18,14 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
-    return view('home', [
-        "title" => "Home"
-    ]);
-});
+Route::get('/', [PostController::class, 'home']);
 
-Route::get('/about', function () {
-    return view('about', [
-        "title" => "About",
-        "name" => "M Usman Maulana",
-        "email" => "um59411@gmail.com",
-        "hoby" => "Ngoding",
-        "img" => "foto.jpg"
-    ]);
-});
+Route::get('/about', [PostController::class, 'about']);
 
 
-Route::get('/posts', function () {
-    return view('posts', [
-        "title" => "Posts",
-        "posts" => Post::all()
-    ]);
-});
+Route::get('/posts',[PostController::class, 'index']);
 
 // halaman single post
-Route::get('posts/{slug}', function($slug){
-    return view('post',[
-        "title" => "Single Post",
-        "post" => Post::find($slug)
-    ]);
-});
+Route::get('posts/{slug}', [PostController::class, 'singlePost']);
 
-Route::get('/contact', function(){
-    return view('contact', [
-        "title" => "Contact",
-        "telp" => "0895392925828",
-        "email" => "usman.id",
-        "alamat" => "Pandeglang"
-    ]);
-});
+Route::get('/contact', [PostController::class, 'contact']);
