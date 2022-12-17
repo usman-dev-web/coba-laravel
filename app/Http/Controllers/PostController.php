@@ -45,4 +45,5 @@ class PostController extends Controller
             "alamat" => "Pandeglang"
         ]);
     }
+
 }

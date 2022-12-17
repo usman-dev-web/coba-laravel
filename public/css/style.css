@@ -1,4 +1,9 @@
 body {
-    background-color: rgba(150, 221, 173, 0.295);
+    background-color: rgba(255, 255, 255, 0.295);
     font-family: "Simplified Arabic";
+}
+
+.bg {
+    background-color: whitesmoke;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
