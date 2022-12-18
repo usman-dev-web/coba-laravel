@@ -36,8 +36,9 @@ class Post_
 
 
 // Post::create([
-//     'title' => "Judul Ke Ketiga",
-//     'slug' => "judul-ke-ketiga",
+//     'title' => "Judul Ke Keempat",
+//     'category_id' => 2,
+//     'slug' => "judul-ke-keempat",
 //     'excerpt' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque quasi obcaecati eveniet inventore ipsam temporibus, pariatur vitae ut est numquam, cumque blanditiis quam sed, earum veritatis consectetur sit eius totam perspiciatis hic",
 //     'body' => "<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque quasi obcaecati eveniet inventore ipsam temporibus, pariatur vitae ut est numquam, cumque blanditiis quam sed, earum veritatis consectetur sit eius totam perspiciatis hic. Rem a quis dolorum sed doloribus impedit magnam dolor recusandae earum consectetur laboriosam quasi minus molestias sapiente laudantium aperiam,</p><p> voluptas eaque vel temporibus incidunt quos illum. Ad nam iusto harum. Est sunt, reprehenderit, esse accusantium tenetur minus facilis quisquam laudantium et, libero dolorum aut fugit tempora tempore? Nobis sed hic, aliquam ipsa ab maxime repellendus reprehenderit molestiae? Rerum, voluptas cupiditate? Ab laborum, dolore facere at laudantium magni et labore</p><p> deserunt quia totam incidunt sint rem quaerat. Quae cumque iste voluptatibus? Ipsa quidem qui quis ducimus nobis sunt distinctio, incidunt, quas sapiente fugiat laboriosam error commodi a aliquam minima. Et exercitationem, reprehenderit iusto repudiandae ad saepe laboriosam quibusdam, veritatis non dolores quidem quam ratione eum? Provident in quo sapiente!</p>"
 // ])
