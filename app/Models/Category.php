@@ -13,6 +13,7 @@ class Category extends Model
     protected $guarded = ['id'];
 
     public function posts(){
+        // satu category bisa punya banyak post
         return $this->hasMany(Post::class);
     }
 }

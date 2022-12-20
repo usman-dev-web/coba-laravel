@@ -18,10 +18,12 @@ class Post extends Model
     // membuat relasi ke tabel kategory
     public function category(){
         // 1 ke 1
+        // satu post hanya boleh punya satu category
         return $this->belongsTo(Category::class);
     }
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function author(){
+        // satu post hanya boleh punya satu user
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

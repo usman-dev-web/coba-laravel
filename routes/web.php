@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\PostController;
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,13 @@ Route::get('/categories/{category:slug}', function(Category $category){
         'title' => $category->name,
         'posts' => $category->posts,
         'category' => $category->name
+    ]);
+});
+
+Route::get('/authors/{author:username}', function(User $author){
+    return view('posts', [
+        'title' => "User Posts",
+        'posts' => $author->posts,
     ]);
 });
 
