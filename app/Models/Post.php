@@ -14,7 +14,7 @@ class Post extends Model
 
     // field yang tidak boleh diisi, sisinya boleh
     protected $guarded = ['id'];
-
+    protected $with = ['category', 'author'];
     // membuat relasi ke tabel kategory
     public function category(){
         // 1 ke 1
