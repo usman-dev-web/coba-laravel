@@ -10,13 +10,15 @@ class PostController extends Controller
 
     public function home(){
         return view('home', [
-            "title" => "Home"
+            "title" => "Home",
+            "active" => "home"
         ]);
     }
 
     public function about(){
         return view('about', [
             "title" => "About",
+            "active" => "about",
             "name" => "M Usman Maulana",
             "email" => "um59411@gmail.com",
             "hoby" => "Ngoding",
@@ -26,6 +28,7 @@ class PostController extends Controller
     public function index(){
         return view('posts', [
             "title" => "All Posts",
+            "active" => 'posts',
             // "posts" => Post::all()
             "posts" => Post::latest()->get()
         ]);
@@ -34,6 +37,7 @@ class PostController extends Controller
     public function singlePost(Post $post){
         return view('post',[
             "title" => "Single Post",
+            "active" => 'posts',
             "post" => $post
         ]);
     }
@@ -41,6 +45,7 @@ class PostController extends Controller
     public function contact(){
         return view('contact', [
             "title" => "Contact",
+            'active' => "contact",
             "telp" => "0895392925828",
             "email" => "usman.id",
             "alamat" => "Pandeglang"
