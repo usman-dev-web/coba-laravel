@@ -15,6 +15,20 @@ class Post extends Model
     // field yang tidak boleh diisi, sisinya boleh
     protected $guarded = ['id'];
     protected $with = ['category', 'author'];
+
+    // model search untuk menangkap apa yang diketikan user di from search
+    public function scopeFilter($query, array $filters){
+        // if(isset($filters['search']) ? $filters['search'] : false){
+        //     return $query->where('title', 'like', '%' . $filters['search'] . '%')
+        //     ->orWhere('body', 'like', '%' . $filters['search'] . '%');
+        // }
+
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where('title', 'like', '%' . $search . '%')
+            ->orWhere('body', 'like', '%' . $search . '%');
+        });
+    }
+
     // membuat relasi ke tabel kategory
     public function category(){
         // 1 ke 1
