@@ -3,6 +3,7 @@
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +54,7 @@ Route::get('/categories', function(){
 // });
 
 Route::get('/contact', [PostController::class, 'contact']);
+
+// login
+
+Route::get('/login', [LoginController::class, 'index']);
