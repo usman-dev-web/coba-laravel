@@ -33,7 +33,11 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-sidebar-reverse"></i> Dashboard</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
+                      <li>
+                        <form action="/logout" method="post">
+                          @csrf
+                          <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-in-left"></i> Logout</button>
+                        </form>
                     </ul>
                   </li>
                       @else
