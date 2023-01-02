@@ -23,10 +23,24 @@
                 <a class="nav-link {{ ($active === "contact") ? 'active' : '' }}" href="/contact">Contact</a>
               </li>
             </ul>
+
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link {{ ($active === "login") ? 'active' : '' }}" href="/login" ><i class="bi bi-box-arrow-in-right"></i> Login</a>
-              </li>
+                  @auth
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Welcome {{ auth()->user()->name }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-sidebar-reverse"></i> Dashboard</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
+                    </ul>
+                  </li>
+                      @else
+                  <li class="nav-item">
+                    <a class="nav-link {{ ($active === "login") ? 'active' : '' }}" href="/login" ><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                  </li>
+                  @endauth
             </ul>
           </div>
         </div>
