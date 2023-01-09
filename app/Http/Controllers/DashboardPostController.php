@@ -65,6 +65,12 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
+
+        // validasi agar tidak bisa melihat dan mengubah post buatan author lain
+        if ($post->author->id !== auth()->user()->id) {
+            abort(403);
+        }
+
         return view('dashboard.posts.show', [
             'post' => $post
         ]);
@@ -78,6 +84,11 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
+        // agar kita tidak bisa melihat dan mengubah post buatan author lain
+        if ($post->author->id !== auth()->user()->id) {
+            abort(403);
+        }
+
         return view('dashboard.posts.edit', [
             'post' => $post,
             'categories' => Category::all()
@@ -100,7 +111,7 @@ class DashboardPostController extends Controller
         ];
 
         // validasi slug jika slug, ada slug lama maka tidak akan divalidasi, tapi jika ada slug baru maka masuk valiadasi 
-        if($request->slug != $post->slug){
+        if ($request->slug != $post->slug) {
             $rules['slug'] = 'required|unique:posts';
         }
 
@@ -110,8 +121,10 @@ class DashboardPostController extends Controller
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 150);
 
         // menyimpan ke data ke tabel post
-        Post::create($validatedData);
-        return redirect('/dashboard/posts')->with('success', 'New post has been added');
+        Post::where('id', $post->id)
+            ->update($validatedData);
+
+        return redirect('/dashboard/posts')->with('success', 'post has been updated');
     }
 
     /**
@@ -126,7 +139,8 @@ class DashboardPostController extends Controller
         return redirect('/dashboard/posts')->with('success', 'post has been deleted');
     }
 
-    public function checkSlug(Request $request){
+    public function checkSlug(Request $request)
+    {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
     }
