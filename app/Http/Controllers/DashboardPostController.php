@@ -93,7 +93,25 @@ class DashboardPostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $rules = [
+            'title' => 'required|max:255',
+            'category_id' => "required",
+            'body' => 'required'
+        ];
+
+        // validasi slug jika slug, ada slug lama maka tidak akan divalidasi, tapi jika ada slug baru maka masuk valiadasi 
+        if($request->slug != $post->slug){
+            $rules['slug'] = 'required|unique:posts';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 150);
+
+        // menyimpan ke data ke tabel post
+        Post::create($validatedData);
+        return redirect('/dashboard/posts')->with('success', 'New post has been added');
     }
 
     /**
