@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardPostController extends Controller
 {
@@ -51,7 +52,7 @@ class DashboardPostController extends Controller
         ]);
 
         // validasi image jika ada gambar yang diupload
-        if($request->file('image')){
+        if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
 
@@ -113,8 +114,10 @@ class DashboardPostController extends Controller
         $rules = [
             'title' => 'required|max:255',
             'category_id' => "required",
+            'image' => 'image|file|max:2048',
             'body' => 'required'
         ];
+
 
         // validasi slug jika slug, ada slug lama maka tidak akan divalidasi, tapi jika ada slug baru maka masuk valiadasi 
         if ($request->slug != $post->slug) {
@@ -122,6 +125,19 @@ class DashboardPostController extends Controller
         }
 
         $validatedData = $request->validate($rules);
+
+        // validasi image jika ada gambar yang diupload
+        if ($request->file('image')) {
+
+            // jika ada image lama, maka hapus
+            if($request->oldImage){
+                Storage::delete($request->oldImage);
+            }
+
+            // menyimpan gambar ke database
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
+
 
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 150);
