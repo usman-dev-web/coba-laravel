@@ -130,7 +130,7 @@ class DashboardPostController extends Controller
         if ($request->file('image')) {
 
             // jika ada image lama, maka hapus
-            if($request->oldImage){
+            if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
 
@@ -157,6 +157,11 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
+        // jika ada image lama, maka hapus
+        if ($post->image) {
+            Storage::delete($post->image);
+        }
+        // hapus dari tabel
         Post::destroy($post->id);
         return redirect('/dashboard/posts')->with('success', 'post has been deleted');
     }
