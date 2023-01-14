@@ -5,12 +5,12 @@
     <h2 class="h2">Create New Category</h2>
     </div>
     <div class="col-lg-8">
-        <form method="post" action="/dashboard/categories" class="mb-5" enctype="multipart/form-data">
+        <form method="post" action="/dashboard/categories" class="mb-5">
             @csrf
             <div class="mb-3">
-              <label for="category_name" class="form-label">Category Name</label>
-              <input type="text" class="form-control @error('category_name') is-invalid @enderror" id="category_name" name="category_name" required autofocus>
-              @error('category_name')
+              <label for="name" class="form-label">Category Name</label>
+              <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required autofocus>
+              @error('name')
                <div class="invalid-feedback">
                 {{ $message }}  
               </div>   
@@ -30,11 +30,11 @@
     </div>
 
     <script>
-        const title = document.querySelector('#category_name');
+        const title = document.querySelector('#name');
         const slug = document.querySelector('#slug');
 
         title.addEventListener('change', function(){
-            fetch('/dashboard/categories/checkSlug?category_name=' + title.value)
+            fetch('/dashboard/categories/checkSlug?name=' + title.value)
                 .then(response => response.json())
                 .then(data => slug.value = data.slug)
         });

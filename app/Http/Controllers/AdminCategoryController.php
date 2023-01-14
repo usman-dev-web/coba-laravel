@@ -28,7 +28,7 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.add.index', [
+        return view('dashboard.add.create', [
             'categories' => Category::all()
         ]);
     }
@@ -42,7 +42,7 @@ class AdminCategoryController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'category_name' => 'required|max:255',
+            'name' => 'required|max:255',
             'slug' => 'required|unique:posts',
         ]);
 
@@ -98,7 +98,7 @@ class AdminCategoryController extends Controller
 
     public function checkSlug(Request $request)
     {
-        $slug = SlugService::createSlug(Category::class, 'slug', $request->category_name);
+        $slug = SlugService::createSlug(Category::class, 'slug', $request->name);
         return response()->json(['slug' => $slug]);
     }
 }
