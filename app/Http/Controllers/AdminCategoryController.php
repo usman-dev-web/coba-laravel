@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Cviebrock\EloquentSluggable\Services\SlugService;
-
+use GrahamCampbell\ResultType\Success;
 
 class AdminCategoryController extends Controller
 {
@@ -42,7 +42,7 @@ class AdminCategoryController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
+            'name' => 'required|unique:categories|max:255',
             'slug' => 'required|unique:posts',
         ]);
 
@@ -93,7 +93,8 @@ class AdminCategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+        return redirect('/dashboard/categories')->with('success', 'Category has been deleted');
     }
 
     public function checkSlug(Request $request)
