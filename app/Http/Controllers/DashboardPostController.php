@@ -119,7 +119,7 @@ class DashboardPostController extends Controller
         ];
 
 
-        // validasi slug jika slug, ada slug lama maka tidak akan divalidasi, tapi jika ada slug baru maka masuk valiadasi 
+        // validasi slug jika ada slug lama maka tidak akan divalidasi, tapi jika ada slug baru maka masuk valiadasi 
         if ($request->slug != $post->slug) {
             $rules['slug'] = 'required|unique:posts';
         }

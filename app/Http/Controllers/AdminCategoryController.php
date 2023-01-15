@@ -28,7 +28,7 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.add.create', [
+        return view('dashboard.categories.create', [
             'categories' => Category::all()
         ]);
     }
@@ -43,7 +43,7 @@ class AdminCategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:categories|max:255',
-            'slug' => 'required|unique:posts',
+            'slug' => 'required|unique:categories',
         ]);
 
         // menyimpan ke data ke tabel post
@@ -57,10 +57,6 @@ class AdminCategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -70,7 +66,10 @@ class AdminCategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dashboard.categories.edit', [
+            'category' => $category,
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -82,7 +81,21 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $rules = [
+            'name' => 'required|unique:categories|max:255',
+            'slug' => "required|unique:categories",
+        ];
+
+        // jika ada slug lama maka tidak akan divalidasi, tapi jika ada slug baru maka masuk valiadasi 
+        if ($request->slug != $category->name) {
+            $rules['slug'] = 'required|unique:categories';
+
+            $validatedData = $request->validate($rules);
+        }
+
+        Category::where('name', $category->name)
+            ->update($validatedData);
+        return redirect('/dashboard/categories')->with('success', 'Category has been updated');
     }
 
     /**
